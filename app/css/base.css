@@ -60,3 +60,16 @@ p, ul {
 ul {
   padding-left: 30px;
 }
+
+/* #chatForm {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+} */
+.chatForm {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

@@ -50,6 +50,7 @@ app.post('/api/messages', function(req, res) {
       timestamp: Date.now(),
       author: req.body.author,
       text: req.body.text,
+      'file-type': req.body.fileType,
       data: req.body.data
     },
     function(err, r) {
@@ -58,7 +59,6 @@ app.post('/api/messages', function(req, res) {
   );
 });
 
-// FIX THIS
 app.get('/api/messages/:timestamp', function(req, res) {
   db.collection("messages").find({"timestamp": Number(req.params.timestamp)}).toArray(function(err, docs) {
       if (err) throw err;
@@ -66,7 +66,9 @@ app.get('/api/messages/:timestamp', function(req, res) {
   });
 });
 
-// FIX THIS
+//
+
+// maybe not necessary
 app.put('/api/messages/:timestamp', function(req, res) {
   var updateId = Number(req.params.timestamp);
   var update = req.body;
@@ -82,7 +84,6 @@ app.put('/api/messages/:timestamp', function(req, res) {
       });
 });
 
-// FIX THIS
 app.delete('/api/messages/:timestamp', function(req, res) {
   db.collection("messages").deleteOne(
       {'timestamp': Number(req.params.timestamp)},
