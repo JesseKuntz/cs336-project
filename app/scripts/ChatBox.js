@@ -65,7 +65,7 @@ module.exports = React.createClass({
     render: function() {
       return (
         <div className="messageBox">
-          <h1>Messages</h1>
+          <h1>Chat Room</h1>
           <ChatLog data={this.state.data} />
           <ChatForm onMessageSubmit={this.handleMessageSubmit} />
         </div>
