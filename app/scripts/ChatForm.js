@@ -8,13 +8,17 @@ module.exports = React.createClass({
 
     onDrop(file) {
       console.log(file[0]);
-      this.setState({
-        file: file,
-        data: file[0].name
-      });
-      let extension = file[0].name.split('.').pop();
-      if (extension === "png" || extension === "jpg" || extension === "svg") extension = "img";
-      this.setState({fileType: extension});
+
+      const reader = new FileReader()
+      reader.onload = function () {
+        this.setState({data: reader.result})
+      }.bind(this);
+      reader.readAsBinaryString(file[0]);
+
+      // think not necessary because it has a type already
+      // let extension = file[0].name.split('.').pop();
+      // if (extension === "png" || extension === "jpg" || extension === "svg") extension = "img";
+      this.setState({fileType: file[0].type, file: file[0]});
     },
     onCancel() {
       this.setState({
@@ -75,7 +79,7 @@ module.exports = React.createClass({
               <h2>Dropped files</h2>
               <ul>
                 {
-                  <li key={this.state.file.name}>{this.state.file.name} - {this.state.file.size} bytes</li>
+                  <li>{this.state.file.name} - {this.state.file.size} bytes (type: {this.state.fileType})</li>
                 }
               </ul>
             </aside>

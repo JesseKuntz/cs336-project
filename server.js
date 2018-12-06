@@ -22,8 +22,8 @@ var APP_PATH = path.join(__dirname, 'dist');
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(APP_PATH));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
@@ -50,7 +50,7 @@ app.post('/api/messages', function(req, res) {
       timestamp: Date.now(),
       author: req.body.author,
       text: req.body.text,
-      'file-type': req.body.fileType,
+      file_type: req.body.fileType,
       data: req.body.data
     },
     function(err, r) {
