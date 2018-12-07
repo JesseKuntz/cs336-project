@@ -15,6 +15,7 @@ module.exports = React.createClass({
             {this.props.author}
           </h2>
           <span dangerouslySetInnerHTML={this.rawMarkup()} />
+          <a href={this.props.data} download>Download File</a>
         </div>
       );
     }

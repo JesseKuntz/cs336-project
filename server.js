@@ -66,8 +66,6 @@ app.get('/api/messages/:timestamp', function(req, res) {
   });
 });
 
-//
-
 // maybe not necessary
 app.put('/api/messages/:timestamp', function(req, res) {
   var updateId = Number(req.params.timestamp);
@@ -109,7 +107,5 @@ MongoClient.connect('mongodb://awesomeuser:' + process.env.MONGO_PASSWORD + '@ds
 
   db.collection('messages').find().toArray(function (err, result) {
     if (err) throw err
-
-    console.log(result)
-  })
+  });
 });

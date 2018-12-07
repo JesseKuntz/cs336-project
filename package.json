@@ -6,6 +6,7 @@
   "license": "ISC",
   "main": "server.js",
   "dependencies": {
+    "arraybuffer-to-buffer": "0.0.5",
     "assert": "^1.4.1",
     "autoprefixer": "^6.5.3",
     "babel-core": "^6.18.0",

@@ -7,17 +7,15 @@ module.exports = React.createClass({
     },
 
     onDrop(file) {
-      console.log(file[0]);
+      const reader = new FileReader();
 
-      const reader = new FileReader()
-      reader.onload = function () {
+      reader.addEventListener("load", function () {
         this.setState({data: reader.result})
-      }.bind(this);
-      reader.readAsBinaryString(file[0]);
+      }.bind(this), false);
 
-      // think not necessary because it has a type already
-      // let extension = file[0].name.split('.').pop();
-      // if (extension === "png" || extension === "jpg" || extension === "svg") extension = "img";
+      if (file[0]) {
+        reader.readAsDataURL(file[0]);
+      }
       this.setState({fileType: file[0].type, file: file[0]});
     },
     onCancel() {
@@ -31,12 +29,6 @@ module.exports = React.createClass({
     },
     handleTextChange: function(e) {
       this.setState({text: e.target.value});
-    },
-    handleFileChange: function(e) {
-      // check for filetypes here
-      let extension = e.target.value;
-      if (extension === "png" || extension === "jpg" || extension === "svg") extension = "img";
-      this.setState({fileType: extension});
     },
     handleSubmit: function(e) {
       e.preventDefault();
