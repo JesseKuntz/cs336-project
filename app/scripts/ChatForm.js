@@ -46,21 +46,25 @@ module.exports = React.createClass({
       return (
         <form className="chatForm" onSubmit={this.handleSubmit}>
           <input
+            className="authorInput"
+            display="none"
             type="text"
             placeholder="Your name"
             value={this.state.author}
             onChange={this.handleAuthorChange}
           />
           <input
+            className="textInput"
             type="text"
             placeholder="Say something..."
             value={this.state.text}
             onChange={this.handleTextChange}
           />
-          <input type="submit" value="Post" />
-          <section>
-            <div className="dropzone">
+          <input type="submit" value="Post" className="chatSubmit"/>
+          <section className="drop-area">
+            <div className="dropzone-container">
               <ReactDropzone
+                className="dropzone"
                 onDrop={this.onDrop}
                 onFileDialogCancel={this.onCancel}
               >
@@ -68,7 +72,7 @@ module.exports = React.createClass({
               </ReactDropzone>
             </div>
             <aside>
-              <h2>Dropped files</h2>
+              <p>Dropped files</p>
               <ul>
                 {
                   <li>{this.state.file.name} - {this.state.file.size} bytes (type: {this.state.fileType})</li>

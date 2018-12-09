@@ -96,7 +96,9 @@ app.delete('/api/messages/:timestamp', function(req, res) {
 
 app.use('*', express.static(APP_PATH));
 
-MongoClient.connect('mongodb://awesomeuser:' + process.env.MONGO_PASSWORD + '@ds117540.mlab.com:17540/filechat', function (err, client) {
+let MONGO_PASSWORD = "webdevRocks2"
+
+MongoClient.connect('mongodb://awesomeuser:' + MONGO_PASSWORD + '@ds117540.mlab.com:17540/filechat', function (err, client) {
   if (err) throw err
 
   db = client;
