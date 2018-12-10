@@ -46,7 +46,7 @@ module.exports = React.createClass({
       return (
         <form className="chatForm" onSubmit={this.handleSubmit}>
           <input
-            className="authorInput"
+            className={this.state.author == "" ? "authorInput invalid" : "authorInput"}
             display="none"
             type="text"
             placeholder="Your name"
@@ -71,7 +71,8 @@ module.exports = React.createClass({
                 <p>Try dropping some files here, or click to select files to upload.</p>
               </ReactDropzone>
             </div>
-            <aside>
+            <aside
+              className="drop-info">
               <p>Dropped files</p>
               <ul>
                 {

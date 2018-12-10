@@ -9,11 +9,19 @@ module.exports = React.createClass({
     },
 
     render: function() {
+      let classname = ''
+      console.log(this.props.author)
+      console.log("Jesse" === this.props.author)
+      if ("Jesse" === this.props.author) {
+        classname = "message right"
+      } else {
+        classname = "message"
+      }
       return (
-        <div className="message">
-          <h2 className="messageAuthor">
+        <div className={classname}>
+          <em className="messageAuthor">
             {this.props.author}
-          </h2>
+          </em>
           <span dangerouslySetInnerHTML={this.rawMarkup()} />
           <a href={this.props.data} download>Download File</a>
         </div>
