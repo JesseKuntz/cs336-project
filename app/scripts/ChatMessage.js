@@ -11,8 +11,8 @@ module.exports = React.createClass({
     render: function() {
       let classname = ''
       console.log(this.props.author)
-      console.log("Jesse" === this.props.author)
-      if ("Jesse" === this.props.author) {
+      console.log(this.props.name)
+      if (this.props.name === this.props.author) {
         classname = "message right"
       } else {
         classname = "message"

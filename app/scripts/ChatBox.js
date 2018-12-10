@@ -7,7 +7,7 @@ import { API_URL, POLL_INTERVAL } from './global.js';
 
 module.exports = React.createClass({
     getInitialState: function() {
-      return {data: [], _isMounted: false};
+      return {data: [], _isMounted: false, name: ''};
     },
     loadMessagesFromServer: function() {
       if (this.state._isMounted) {
@@ -46,6 +46,9 @@ module.exports = React.createClass({
         }.bind(this)
       });
     },
+    handleNameChange: function(text) {
+      this.setState({name: text});
+    },
     getInitialState: function() {
       return {data: []};
     },
@@ -65,8 +68,8 @@ module.exports = React.createClass({
     render: function() {
       return (
         <div className="messageBox">
-          <ChatLog data={this.state.data} />
-          <ChatForm onMessageSubmit={this.handleMessageSubmit} />
+          <ChatLog data={this.state.data} name={this.state.name}/>
+          <ChatForm onMessageSubmit={this.handleMessageSubmit} onNameChange={this.handleNameChange} />
         </div>
       );
     }

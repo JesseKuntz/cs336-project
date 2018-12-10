@@ -26,6 +26,7 @@ module.exports = React.createClass({
 
     handleAuthorChange: function(e) {
       this.setState({author: e.target.value});
+      this.props.onNameChange(e.target.value)
     },
     handleTextChange: function(e) {
       this.setState({text: e.target.value});
@@ -40,7 +41,7 @@ module.exports = React.createClass({
         return;
       }
       this.props.onMessageSubmit({author: author, text: text, fileType: fileType, data: data});
-      this.setState({author: '', text: ''});
+      this.setState({text: ''});
     },
     render: function() {
       return (
