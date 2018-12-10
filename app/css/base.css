@@ -70,7 +70,7 @@ ul {
 .chatForm {
   position: fixed;
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
   ". a a a a a b b b ."
   ". a a a a a b b b ."
   ". a a a a a b b b ."
@@ -137,7 +137,7 @@ ul {
   float: left;
 }
 
-.message.right { 
+.message.right {
   float: right;
   background: lightblue;
 }

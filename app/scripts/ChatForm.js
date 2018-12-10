@@ -16,7 +16,9 @@ module.exports = React.createClass({
       if (file[0]) {
         reader.readAsDataURL(file[0]);
       }
-      this.setState({fileType: file[0].type, file: file[0]});
+      let extension = file[0].name.split('.').pop();
+
+      this.setState({fileType: extension, file: file[0]});
     },
     onCancel() {
       this.setState({

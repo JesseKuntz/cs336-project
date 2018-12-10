@@ -18,10 +18,14 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var db;
 var APP_PATH = path.join(__dirname, 'dist');
+var DOWNLOAD_PATH = path.join(__dirname, 'download');
+var fs = require('fs');
 
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(APP_PATH));
+app.use('/download', express.static(DOWNLOAD_PATH));
+
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
@@ -45,13 +49,24 @@ app.get('/api/messages', function(req, res) {
 });
 
 app.post('/api/messages', function(req, res) {
+  let time = Date.now();
   db.collection('messages').insertOne(
     {
-      timestamp: Date.now(),
+      timestamp: time,
       author: req.body.author,
       text: req.body.text,
-      file_type: req.body.fileType,
-      data: req.body.data
+      file_type: req.body.fileType
+    },
+    function(err, r) {
+      assert.equal(null, err);
+    }
+  );
+
+  db.collection('data').insertOne(
+    {
+      timestamp: time,
+      data: req.body.data,
+      file_type: req.body.fileType
     },
     function(err, r) {
       assert.equal(null, err);
@@ -64,6 +79,19 @@ app.get('/api/messages/:timestamp', function(req, res) {
       if (err) throw err;
       res.json(docs);
   });
+});
+
+app.get('/api/messages/:timestamp/data', function(req, res) {
+  db.collection("data").findOne({"timestamp": Number(req.params.timestamp)})
+  .then(function(result) {
+    let filename = 'download/download.' + result.file_type;
+    let base64Image = result.data.split(';base64,').pop();
+    fs.writeFile(filename, base64Image, {encoding: 'base64'}, function(err) {
+    });
+
+    res.redirect("/" + filename);
+
+  })
 });
 
 // maybe not necessary
