@@ -90,7 +90,6 @@ app.get('/api/messages/:timestamp/data', function(req, res) {
     });
 
     res.redirect("/" + filename);
-
   })
 });
 
