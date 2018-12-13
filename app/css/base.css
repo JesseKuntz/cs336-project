@@ -71,11 +71,9 @@ ul {
   position: fixed;
   display: grid;
   grid-template-areas:
-  ". a a a a a d d d ."
-  ". a a a a a b b b ."
-  ". a a a a a b b b ."
-  ". c c c c c c c c ."
-  ". c c c c c c c c .";
+  ". a a a a a d d c c ."
+  ". a a a a a b b c c ."
+  ". a a a a a b b c c .";
   grid-row-gap: 10px;
   grid-column-gap: 10px;
   bottom: 0;
@@ -138,7 +136,7 @@ ul {
 }
 
 .drop-info {
-  display: none;
+  font-size: 10pt;
 }
 
 .message {

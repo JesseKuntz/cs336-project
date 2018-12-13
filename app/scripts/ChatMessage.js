@@ -34,13 +34,18 @@ module.exports = React.createClass({
     var styles = {
       background: this.intToRGB(this.hashCode(this.props.author))
     }
+    let dataClass = ''
+    if (this.props.dataType == '') {
+      dataClass += 'hide'
+    }
+
     return (
       <div className={classname} style={styles}>
         <em className="messageAuthor">
           {this.props.author}
         </em>
         <span dangerouslySetInnerHTML={this.rawMarkup()} />
-        <a href={'/api/messages/' + this.props.timestamp + '/data'} download>Download File</a>
+        <a className={dataClass} href={'/api/messages/' + this.props.timestamp + '/data'} download>Download File</a>
       </div>
     );
   }

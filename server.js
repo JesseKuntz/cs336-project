@@ -103,7 +103,7 @@ app.get('/api/messages/:timestamp/data', function(req, res) {
     let base64Image = result.data.split(';base64,').pop();
     fs.writeFile(filename, base64Image, {encoding: 'base64'}, function(err) {
     });
-
+    console.log('Redirecting to ' + "/" + filename)
     res.redirect("/" + filename);
   })
 });

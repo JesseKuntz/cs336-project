@@ -7,7 +7,7 @@ module.exports = React.createClass({
       var authorName = this.props.name
       var messageNodes = this.props.data.map(function(message) {
         return (
-          <ChatMessage timestamp={message.timestamp} author={message.author} key={message.timestamp} name={authorName}>
+          <ChatMessage timestamp={message.timestamp} author={message.author} key={message.timestamp} name={authorName} dataType={message.file_type}>
             {message.text}
           </ChatMessage>
         );
