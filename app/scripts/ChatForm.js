@@ -59,7 +59,6 @@ module.exports = React.createClass({
       reader.readAsDataURL(file[0]);
     }
     let extension = file[0].name.split('.').pop();
-    console.log(extension);
     this.setState({ fileType: extension, file: file[0] });
   },
   onCancel() {
@@ -119,8 +118,7 @@ module.exports = React.createClass({
               <p>Try dropping some files here, or click to select files to upload.</p>
             </ReactDropzone>
           </div>
-          <aside
-            className="drop-info">
+          <aside className="drop-info">
             <p>Dropped files</p>
             <ul>
               {

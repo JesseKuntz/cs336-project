@@ -147,7 +147,7 @@ ul {
 
 .message.right {
   float: right;
-  background: lightblue;
+  /* background: lightblue; */
 }
 
 .right > a {
@@ -163,7 +163,7 @@ ul {
   border-radius: 17px;
   width: 50%;
   margin-bottom: 25px;
-  background: lightgray;
+  /* background: lightgray; */
 }
 
 .message * {
