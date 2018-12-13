@@ -26,8 +26,8 @@ app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(APP_PATH));
 app.use('/download', express.static(DOWNLOAD_PATH));
 
-app.use(bodyParser.json({limit: '10mb'}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.json({limit: '16mb'}));
+app.use(bodyParser.urlencoded({limit: '16mb', extended: true}));
 
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {

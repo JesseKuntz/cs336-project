@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDropzone from 'react-dropzone';
+import { Line } from 'rc-progress';
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { author: '', text: '', fileType: null, data: '', file: {}, percent: 0};
+    return { author: '', text: '', fileType: null, data: '', file: {}, completed: 0};
   },
   componentDidMount: function () {
     this.checkCookie();
@@ -38,11 +39,21 @@ module.exports = React.createClass({
   },
 
   onDrop(file) {
+    this.setState({completed: 0})
     const reader = new FileReader();
 
     reader.addEventListener("load", function () {
       this.setState({ data: reader.result })
     }.bind(this), false);
+
+    reader.onprogress = function(e) {
+      var percent = Math.floor(e.loaded);
+      if (percent >= 100) {
+        this.setState({ completed: 100 });
+      } else {
+        this.setState({ completed: percent });
+      }
+    }.bind(this);
 
     if (file[0]) {
       reader.readAsDataURL(file[0]);
@@ -75,7 +86,7 @@ module.exports = React.createClass({
       return;
     }
     this.props.onMessageSubmit({ author: author, text: text, fileType: fileType, data: data });
-    this.setState({ text: '' });
+    this.setState({ text: '', completed: 0});
     this.setCookie("username", author, 365);
   },
   render: function () {
@@ -97,6 +108,7 @@ module.exports = React.createClass({
           onChange={this.handleTextChange}
         />
         <input type="submit" value="Post" className="chatSubmit" />
+        <Line className="progress-bar" percent={this.state.completed} />
         <section className="drop-area">
           <div className="dropzone-container">
             <ReactDropzone
