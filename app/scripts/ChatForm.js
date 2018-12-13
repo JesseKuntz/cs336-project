@@ -73,7 +73,9 @@ module.exports = React.createClass({
   // Resets the file when dialog canceled
   onCancel() {
     this.setState({
-      file: {}
+      file: {},
+      fileType: null,
+      data: ''
     });
   },
 
@@ -99,6 +101,8 @@ module.exports = React.createClass({
 
     // Stores a cookie of the author for a year
     this.setCookie("username", author, 365);
+
+    this.onCancel();
   },
   render: function () {
     return (
