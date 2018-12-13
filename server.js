@@ -82,7 +82,12 @@ app.get('/api/messages/:timestamp', function(req, res) {
 });
 
 app.get('/api/messages/:timestamp/data', function(req, res) {
-  // Clear out the downloads folder
+  // Make the download folder if it doesn't already exist
+  if (!fs.existsSync('download')){
+    fs.mkdirSync('download');
+  }
+
+  // Clear out the download folder
   fs.readdir('download', (err, files) => {
     if (err) throw err;
     for (const file of files) {
