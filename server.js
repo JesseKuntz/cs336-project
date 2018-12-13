@@ -1,15 +1,3 @@
-/**
- * This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only. Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -103,12 +91,11 @@ app.get('/api/messages/:timestamp/data', function(req, res) {
     let base64Image = result.data.split(';base64,').pop();
     fs.writeFile(filename, base64Image, {encoding: 'base64'}, function(err) {
     });
-    console.log('Redirecting to ' + "/" + filename)
     res.redirect("/" + filename);
   })
 });
 
-// maybe not necessary
+// Used through CURL
 app.put('/api/messages/:timestamp', function(req, res) {
   var updateId = Number(req.params.timestamp);
   var update = req.body;
@@ -124,6 +111,7 @@ app.put('/api/messages/:timestamp', function(req, res) {
       });
 });
 
+// Used through CURL
 app.delete('/api/messages/:timestamp', function(req, res) {
   db.collection("messages").deleteOne(
       {'timestamp': Number(req.params.timestamp)},

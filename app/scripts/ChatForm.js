@@ -6,16 +6,21 @@ module.exports = React.createClass({
   getInitialState: function () {
     return { author: '', text: '', fileType: null, data: '', file: {}, completed: 0};
   },
+
+  // Update the cookie as much as possible
   componentDidMount: function () {
     this.checkCookie();
   },
 
+  // Sets a cookie in the browser
   setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   },
+
+  // Gets a cookie in the browser
   getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -30,6 +35,8 @@ module.exports = React.createClass({
     }
     return "";
   },
+
+  // Checks if a cookie exists and updates the author accordingly
   checkCookie() {
     var user = this.getCookie("username");
     if (user != "") {
@@ -38,6 +45,7 @@ module.exports = React.createClass({
     }
   },
 
+  // When file is uploaded, handles progress bar updating and data parsing
   onDrop(file) {
     this.setState({completed: 0})
     const reader = new FileReader();
@@ -61,6 +69,8 @@ module.exports = React.createClass({
     let extension = file[0].name.split('.').pop();
     this.setState({ fileType: extension, file: file[0] });
   },
+
+  // Resets the file when dialog canceled
   onCancel() {
     this.setState({
       file: {}
@@ -86,6 +96,8 @@ module.exports = React.createClass({
     }
     this.props.onMessageSubmit({ author: author, text: text, fileType: fileType, data: data });
     this.setState({ text: '', completed: 0});
+
+    // Stores a cookie of the author for a year
     this.setCookie("username", author, 365);
   },
   render: function () {

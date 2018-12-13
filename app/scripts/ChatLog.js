@@ -5,6 +5,7 @@ import ChatMessage from './ChatMessage.js';
 module.exports = React.createClass({
     render: function() {
       var authorName = this.props.name
+      // Creates a chat message for each data object
       var messageNodes = this.props.data.map(function(message) {
         return (
           <ChatMessage timestamp={message.timestamp} author={message.author} key={message.timestamp} name={authorName} dataType={message.file_type}>

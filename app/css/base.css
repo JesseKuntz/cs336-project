@@ -61,16 +61,11 @@ ul {
   padding-left: 30px;
 }
 
-/* #chatForm {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-} */
 .chatForm {
   position: fixed;
   display: grid;
   grid-template-areas:
+  ". a a a a a d d c c ."
   ". a a a a a d d c c ."
   ". a a a a a b b c c ."
   ". a a a a a b b c c .";
@@ -82,6 +77,15 @@ ul {
   height: 20%;
   text-align: center;
   background: white;
+}
+
+.dropzone {
+  height: 100%;
+}
+
+.dropzone-container {
+  position: absolute;
+  height: 100%;
 }
 
 .drop-area {
@@ -137,6 +141,7 @@ ul {
 
 .drop-info {
   font-size: 10pt;
+  margin-top: 40px;
 }
 
 .message {

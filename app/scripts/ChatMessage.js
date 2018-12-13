@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import marked from 'marked';
 
 module.exports = React.createClass({
@@ -8,7 +7,8 @@ module.exports = React.createClass({
     return { __html: rawMarkup };
   },
 
-  hashCode(str) { // java String#hashCode
+  // Converts a string to a hash code
+  hashCode(str) {
     var hash = 0;
     for (var i = 0; i < str.length; i++) {
        hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -16,6 +16,7 @@ module.exports = React.createClass({
     return hash;
   },
 
+  // Converts a hash code to RGB
   intToRGB(i){
     var c = (i & 0x00FFFFFF)
         .toString(16)
@@ -25,15 +26,20 @@ module.exports = React.createClass({
   },
 
   render: function () {
+    // Moves the messages to the left and right depending on current author name
     let classname = ''
     if (this.props.name === this.props.author) {
       classname = "message right"
     } else {
       classname = "message"
     }
+
+    // Hashes the author's name into a background color for the message
     var styles = {
       background: this.intToRGB(this.hashCode(this.props.author))
     }
+
+    // Hides the download link if no data for that message
     let dataClass = ''
     if (this.props.dataType == '') {
       dataClass += 'hide'
