@@ -3,7 +3,7 @@ import ReactDropzone from 'react-dropzone';
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { author: '', text: '', fileType: null, data: '', file: {}};
+    return { author: '', text: '', fileType: null, data: '', file: {}, percent: 0};
   },
   componentDidMount: function () {
     this.checkCookie();
@@ -117,7 +117,6 @@ module.exports = React.createClass({
             </ul>
           </aside>
         </section>
-
       </form>
     );
   }

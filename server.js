@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/messages', function(req, res) {
-  db.collection('messages').find().toArray(function (err, result) {
+  db.collection('messages').find().sort({timestamp: 1}).toArray(function (err, result) {
     assert.equal(null, err);
 
     res.json(result);
@@ -82,9 +82,19 @@ app.get('/api/messages/:timestamp', function(req, res) {
 });
 
 app.get('/api/messages/:timestamp/data', function(req, res) {
+  // Clear out the downloads folder
+  fs.readdir('download', (err, files) => {
+    if (err) throw err;
+    for (const file of files) {
+      fs.unlink(path.join('download', file), err => {
+        if (err) throw err;
+      });
+    }
+  });
+
   db.collection("data").findOne({"timestamp": Number(req.params.timestamp)})
   .then(function(result) {
-    let filename = 'download/download.' + result.file_type;
+    let filename = 'download/' + result.timestamp + '.' + result.file_type;
     let base64Image = result.data.split(';base64,').pop();
     fs.writeFile(filename, base64Image, {encoding: 'base64'}, function(err) {
     });
