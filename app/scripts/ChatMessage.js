@@ -44,7 +44,7 @@ module.exports = React.createClass({
         <em className="messageAuthor">
           {this.props.author}
         </em>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+        <p dangerouslySetInnerHTML={this.rawMarkup()} />
         <a className={dataClass} href={'/api/messages/' + this.props.timestamp + '/data'} download>Download File</a>
       </div>
     );
